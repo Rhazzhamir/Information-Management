@@ -1,0 +1,55 @@
+CREATE DATABASE Information_Management;
+
+USE Information_Management;
+
+
+CREATE TABLE Manage_Category(
+	Category_Id INT PRIMARY KEY NOT NULL auto_increment,
+    category_Name VARCHAR(200) NOT NULL,
+    Posting_Date TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+CREATE TABLE Manage_Product (
+    Product_Id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    Category_Id INT NOT NULL,
+    Product_Name VARCHAR(20) NOT NULL,
+    Product_Price INT NOT NULL,
+    Product_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+CREATE TABLE Seller (
+    Seller_Id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    Product_Id INT NOT NULL,
+    Sales_Id INT NOT NULL,
+    Seller_Name VARCHAR(200) NOT NULL,
+    Address VARCHAR(200)
+);
+
+ 
+
+
+
+CREATE TABLE Sales (
+	Sales_Id INT PRIMARY KEY NOT NULL auto_increment,
+    Order_Id INT NOT NULL,
+	Seller_Name VARCHAR(200) NOT NULL,
+    Category VARCHAR(200) NOT NULL,
+    Pricing INT NOT NULL
+);
+
+CREATE TABLE Order_Id(
+	Order_Id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    Customer_Id INT NOT NULL, 
+    Quantity INT NOT NULL,
+    Price INT NOT NULL,
+    Order_DATE TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+
+
+
+
+
+
+
+
