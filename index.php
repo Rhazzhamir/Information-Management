@@ -31,7 +31,7 @@
 <body>
     <nav class="navbar navbar-expand bg-body-secondary p-1">
         <div class=" m-2">
-            <img src="../Information Management//Img_logo//Logo.png" class="logo" alt="">
+        <img src="./Img_logo/Logo.png" class="logo" alt="">
         </div>
         <div class="d-flex">
             <div class="product collapse navbar-collapse m-0" id="navbarSupportedContent">
@@ -42,7 +42,7 @@
                         </div>
                         <ul class="dropdown-menu text-center">
                             <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal">Profile</a></li>
-                            <li><a class="dropdown-item" href="../Information Management//Register_User.php">Register_User</a></li>
+                            <li><a class="dropdown-item" href="./Register_User.php">Register_User</a></li>
                         </ul>
                     </li>
                     <li class="nav-item dropdown align-item-center">
@@ -76,7 +76,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form method="post" action=""> 
+                    <form method="post" action="./users/create_user.php"> 
                         <div class="mb-3">
                             <label for="FirstName" class="form-label">First Name</label>
                             <input type="text" class="form-control" id="firstName" name="First_Name" aria-describedby="emailHelp">
@@ -87,7 +87,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="MobileNumber" class="form-label">Mobile Number</label>
-                            <input type="number" class="form-control" id="MobileNumber" name="Mobile_Number" aria-describedby="emailHelp">
+                            <input type="text" class="form-control" id="MobileNumber" name="Contact_Number" aria-describedby="emailHelp">
                         </div>
                         <div class="mb-3">
                             <label for="address" class="form-label">Address</label>
