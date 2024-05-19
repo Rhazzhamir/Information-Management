@@ -5,6 +5,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
   exit;
 }
 
+$id = filter_input(INPUT_POST, "id", FILTER_VALIDATE_INT);
 $category_id = filter_input(INPUT_POST, "category_id", FILTER_VALIDATE_INT);
 $product_name = filter_input(INPUT_POST, "product_name", FILTER_SANITIZE_SPECIAL_CHARS);
 $product_price = filter_input(INPUT_POST, "product_price", FILTER_VALIDATE_FLOAT);
@@ -26,18 +27,18 @@ $product_img_extention = strtolower(pathinfo($product_img['name'], PATHINFO_EXTE
 
 if ($product_img_size >= $maxFileSize || 
   !in_array($product_img_extention, $allowedExtension)) {
-    echo "Invalid Image";
-    exit;
+    $product_img = null;
 }
 
-include_once('../include/Connection.php');
 
+include('../include/Connection.php');
 
-$query = "INSERT INTO Product (Category_Id, Product_Name, Product_Price, Product_img, Product_Stock)
-VALUES (?, ?, ?, ?, ?)";
-$stmt = $connect->prepare($query);
-$stmt->bind_param("isdbi", $category_id, $product_name, $product_price, $product_img, $product_stock);
+$sql = "CALL Edit_Product(?, ?, ?, ?, ?, ?)";
+
+$stmt = $connect->prepare($sql);
+$stmt->bind_param("iisdbi", $id, $category_id, $product_name, $product_price, $product_img, $product_stock);
 $stmt->execute();
 $stmt->close();
 $connect->close();
 header("Location: ../Manage_product.php");
+
