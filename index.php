@@ -9,17 +9,15 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <title>Document</title>
+</head>   
     <body>
-</head>
-
-<body>
     <nav class="navbar navbar-expand bg-body-secondary p-1">
         <div class=" m-2">
             <div class="shine">ITshoeStore</div>
         </div>
         <div class="d-flex">
-            <div class="product collapse navbar-collapse mt-2" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0  ">
+            <div class="product collapse navbar-collapse mb-4 " id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto ">
                     <li  class="nav-item dropdown ">
                         <div id="profileNameDisplay" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             Profile
@@ -39,6 +37,14 @@
                         </ul>
                     </li>
                 </ul>
+                <div class="btn-category">
+                    <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Small button
+                    </button>
+                    <ul class="dropdown-menu">
+                        ...
+                    </ul>
+                </div>
                 <form class="search_bar d-flex" role="search">
                     <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
                     <button class="btn btn-outline-success" type="submit">Search</button>
