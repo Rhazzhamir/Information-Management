@@ -43,7 +43,7 @@ CREATE TABLE Transaction (
 
 
 CREATE TABLE Order_Product (
-	Order_Id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,a
+	Order_Id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
     Customer_Id INT NOT NULL, 
     Product_Id INT NOT NULL,
     Transaction_Id INT NOT NULL,
