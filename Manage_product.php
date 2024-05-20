@@ -23,6 +23,12 @@
                 margin-right: 20px;
                 height: 38px;
             }
+            .product-img img {
+                width: 80px;
+                height: 80px;
+                object-fit: cover;
+                object-position: center;
+            }
         </style>
     </head>
     <body>
@@ -59,12 +65,7 @@
                 <tr scope="row" data-product-id="<?= $row['Product_Id'] ?>" data-product-name="<?= $row['Product_Name'] ?>" data-category-id="<?= $row['Category_Id'] ?>">
                     <td class="product-id"><?php echo $row['Product_Id']; ?></td>
                     <td class="category-id"><?php echo $row['Category_Id'];  ?></td>
-                    <td class="product-img"><?php 
-                        // Assuming Product_Img is stored as a blob in the database
-                        $imgData = base64_encode($row['Product_Img']);
-                        $imgType = 'image/jpeg'; // Change this if your image is of a different type
-                        echo '<img src="data:' . $imgType . ';base64,' . $imgData . '" alt="Product Image" style="width: 100px; height: auto;" />';
-                        ?></td>
+                    <td class="product-img"><img src="<?php echo 'data:image/jpeg;base64,' . base64_encode($row['Product_Img']) ?>"></td> <!-- -->
                     <td class="product-name"><?php echo $row['Product_Name']; ?></td>
                     <td class="product-price"><?php echo $row['Product_Price']; ?></td>
                     <td class="product-stock"><?php echo $row['Product_Stock']; ?></td>

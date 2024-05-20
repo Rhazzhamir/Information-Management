@@ -15,4 +15,6 @@ $stmt->bind_param("s", $name);
 echo $stmt->execute();
 $stmt->close();
 $connect->close();
-header("Location: ../Manage_product.php");
+if (isset($_SERVER['HTTP_REFERER'])) {
+  header("Location: " . $_SERVER['HTTP_REFERER']);
+}

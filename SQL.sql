@@ -42,15 +42,14 @@ CREATE TABLE Transaction (
     Transaction_Date TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
 
-CREATE TABLE Order_Product (
-	Order_Id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
-    Customer_Id INT NOT NULL, 
-    Product_Id INT NOT NULL,
-    Transaction_Id INT NOT NULL,
-    Quantity INT NOT NULL,
-    foreign key (Customer_Id) references Customer(Customer_Id),
-    foreign key (Product_Id) references Product(Product_Id),
-    foreign key (Transaction_Id) references Transaction(Transaction_Id)
+CREATE TABLE Order_Products(
+	Order_ID INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    Product_ID INT NOT NULL,
+    Transaction_ID INT NOT NULL,
+    Customer_Id INT NOT NULL,
+    foreign key (Product_ID) references Product(Product_ID),
+    foreign key (Transaction_ID) references Transaction(Transaction_ID),
+    foreign key (Customer_Id) references Transaction(Customer_Id)
 );
 
 
@@ -61,7 +60,7 @@ CREATE PROCEDURE Edit_Product (
     IN in_Category_Id INT,
     IN in_Product_Name VARCHAR(255),
     IN in_Product_Price DECIMAL(10,2),
-    IN in_Product_img VARCHAR(255),
+    IN in_Product_img mediumblob,
     IN in_Product_Stock INT
 )
 BEGIN
@@ -70,9 +69,9 @@ BEGIN
         Category_Id = CASE WHEN in_Category_Id IS NOT NULL THEN in_Category_Id ELSE Category_Id END,
         Product_Name = CASE WHEN in_Product_Name IS NOT NULL AND in_Product_Name != '' THEN in_Product_Name ELSE Product_Name END,
         Product_Price = CASE WHEN in_Product_Price IS NOT NULL THEN in_Product_Price ELSE Product_Price END,
-        Product_img = CASE WHEN in_Product_img IS NOT NULL AND in_Product_img != '' THEN in_Product_img ELSE Product_img END,
         Product_Stock = CASE WHEN in_Product_Stock IS NOT NULL THEN in_Product_Stock ELSE Product_Stock END
     WHERE Product_Id = in_Product_Id;
+    UPDATE Product SET Product_img = in_Product_img WHERE in_Product_img IS NOT NULL;
 END //
 
 DELIMITER ;
