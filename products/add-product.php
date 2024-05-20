@@ -36,7 +36,8 @@ include_once('../include/Connection.php');
 $query = "INSERT INTO Product (Category_Id, Product_Name, Product_Price, Product_img, Product_Stock)
 VALUES (?, ?, ?, ?, ?)";
 $stmt = $connect->prepare($query);
-$stmt->bind_param("isdbi", $category_id, $product_name, $product_price, $product_img, $product_stock);
+$product_img_data = file_get_contents($product_img['tmp_name']);
+$stmt->bind_param("isdsi", $category_id, $product_name, $product_price, $product_img_data, $product_stock);
 $stmt->execute();
 $stmt->close();
 $connect->close();
