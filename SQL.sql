@@ -70,7 +70,7 @@ FROM
 WHERE
 	Product.Category_Id = Category.Category_Id;
 
-
+-- DELETE
 DELIMITER //
 CREATE PROCEDURE Force_Delete_Category (IN in_category_id INT)
 BEGIN
@@ -80,6 +80,7 @@ END //
 DELIMITER ;
 
 
+-- EDIT
 DELIMITER //
 
 CREATE PROCEDURE Edit_Product (
