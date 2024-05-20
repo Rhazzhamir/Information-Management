@@ -13,6 +13,16 @@
             form.mb-3 > input{
                 width: 500px;
             }
+            .category-container {
+                display: flex;
+                align-items: center;
+            }
+            #category {
+                max-width: 200px;
+                margin-left: 10px;
+                margin-right: 20px;
+                height: 38px;
+            }
         </style>
     </head>
     <body>
@@ -25,87 +35,141 @@
         </a>
         <div class=" p-5 mb-5border border-1px-red card-body">
             <form action="./products/add-product.php" method="post" enctype="multipart/form-data">
-                <div class="mb-3">
-                    <label for="Product_Name" class="form-label">Product Name</label>
-                    <input type="text" class="form-control" id="Product_Name" name="product_name">
-                </div>
-                <div class="mb-3">
-                    <label for="Product_Image" class="form-label">Product Image</label>
-                    <input type="file" class="form-control" id="Product_Image" name="product_img">
-                </div>
-                <div class="mb-3">
-                    <label for="Product_Price" class="form-label">Product Price</label>
-                    <input type="number" class="form-control" id="Product_Price" name="product_price">
-                </div>
-                <div class="mb-3">
-                    <label for="Product_Stock" class="form-label">Product Stock</label>
-                    <input type="number" class="form-control" id="Product_Stock" name="product_stock">
-                </div>
-                <div>
-                    <label for="category">Category</label>
-                    <select name="category_id" id="category">
-                        <?php
-                        include_once('./category/get-categories.php');
-                        foreach($data as $row):?>
-                        <option value="<?= $row['category_id'] ?>"><?= $row['category_name'] ?></option>
-                        <?php endforeach ?>
-                    </select>
-                </div>
-                
-                <button type="submit" class="btn btn-success">Save</button>
+                <?php include('./include/product-form.php'); ?>
             </form>
-            <div>
-                <form action="./category/add-category.php" method="post">
-                    <input type="text" name="category_name" placeholder="Enter Category">
-                    <button type="submit" class="btn btn-success">Add</button>
-                </form>
-            </div>
         </div>
     </div>
 
     <div class="card  m-5">
-        <table>
+        <table class="table">
             <thead>
-                <th>Product Id</th>
-                <th>Category Id</th>
-                <th>Product Image</th>
-                <th>Product Name</th>
-                <th>Product Price</th>
-                <th>Product Stock</th>
-                <th>Product Date</th>
-                <th>Update</th>
-                <th>Delete</th>
+                <th scope="col">Product Id</th>
+                <th scope="col">Category Id</th>
+                <th scope="col">Product Image</th>
+                <th scope="col">Product Name</th>
+                <th scope="col">Product Price</th>
+                <th scope="col">Product Stock</th>
+                <th scope="col">Product Date</th>
+                <th scope="col">Action</th>
             </thead>
             <tbody>
                 <?php 
                 include_once('./products/get-products.php');
                 foreach ($data as $row):?>
-                <tr data-product-id="<?= $row['Product_Id'] ?>" data-category-id="<?= $row['Category_Id'] ?>">
-                    <td><?php echo $row['Product_Id']; ?></td>
-                    <td><?php echo $row['Category_Id'];  ?></td>
-                    <td><?php 
+                <tr scope="row" data-product-id="<?= $row['Product_Id'] ?>" data-product-name="<?= $row['Product_Name'] ?>" data-category-id="<?= $row['Category_Id'] ?>">
+                    <td class="product-id"><?php echo $row['Product_Id']; ?></td>
+                    <td class="category-id"><?php echo $row['Category_Id'];  ?></td>
+                    <td class="product-img"><?php 
                         // Assuming Product_Img is stored as a blob in the database
                         $imgData = base64_encode($row['Product_Img']);
                         $imgType = 'image/jpeg'; // Change this if your image is of a different type
                         echo '<img src="data:' . $imgType . ';base64,' . $imgData . '" alt="Product Image" style="width: 100px; height: auto;" />';
                         ?></td>
-                    <td><?php echo $row['Product_Name']; ?></td>
-                    <td><?php echo $row['Product_Price']; ?></td>
-                    <td><?php echo $row['Product_Stock']; ?></td>
-                    <td><?php echo $row['Product_date']; ?></td>
+                    <td class="product-name"><?php echo $row['Product_Name']; ?></td>
+                    <td class="product-price"><?php echo $row['Product_Price']; ?></td>
+                    <td class="product-stock"><?php echo $row['Product_Stock']; ?></td>
+                    <td class="product-date"><?php echo $row['Product_date']; ?></td>
                     <td>
-                    <button type="button" data-row-id="<?php echo $row['Id']?>" class="btn btn-success update-button" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                        Update
-                    </button>
-                    </td>
-                    <td>
-                        <a href="Delete.php?Id=<?php echo $row['Id']?>" class="btn btn-danger">Delete</a>
+                        <button type="button" class="btn btn-success update-button" data-bs-toggle="modal" data-bs-target="#editModal">
+                            Update
+                        </button>
+                        <button type="button" class="btn btn-danger delete-button" data-bs-toggle="modal" data-bs-target="#deleteModal">
+                            Delete
+                        </button>
                     </td>
                 </tr>  
                 <?php endforeach ?>
             </tbody>
         </table>
     </div>
+
+    <!-- category modal -->
+    <div class="modal fade" id="categoryModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5">Add Category</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="./category/add-category.php" method="post">
+                        <div class="mb-3">
+                            <label for="addCategoryInput" class="form-label">Enter Category:</label>
+                            <input id="addCategoryInput" type="text" class="form-control" name="category_name">
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-success">Add</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="deleteModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5">Remove Product</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="products/delete-product.php" method="post">
+                        <div class="mb-3">
+                            <label for="removeProductButton" class="form-label">Are you sure do you want to remove <span id="productName"></span>?</label>
+                            <div class="modal-footer">
+                                <button class="btn btn-primary" type="submit" id="removeProductButton">Yes</button>
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="editModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5">Edit Product</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="./products/update-product.php" method="post" enctype="multipart/form-data">
+                        <?php include('./include/product-form.php'); ?>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        document.querySelector('#deleteModal').addEventListener('show.bs.modal', (event) => {
+            const row = event.relatedTarget.closest('tr');
+            const productName = row.getAttribute('data-product-name');
+            const productId = row.getAttribute('data-product-id');
+            const form = document.querySelector('#deleteModal form');
+            const submit = form.querySelector('[type="submit"]');
+            document.querySelector('#deleteModal #productName').textContent = productName;
+            submit.setAttribute('name', 'id');
+            submit.setAttribute('value', productId);
+        });
+
+        document.querySelector('#editModal').addEventListener('show.bs.modal', (event) => {
+            const row = event.relatedTarget.closest('tr');
+            const productId = row.getAttribute('data-product-id');
+            const form = document.querySelector('#editModal form');
+            const submit = form.querySelector('[type="submit"]');
+            document.querySelector('#editModal #Product_Name').value = row.querySelector('.product-name').textContent;
+            document.querySelector('#editModal #Product_Price').value = row.querySelector('.product-price').textContent;
+            document.querySelector('#editModal #Product_Stock').value = row.querySelector('.product-stock').textContent;
+            document.querySelector('#editModal #category').value = row.querySelector('.category-id').textContent;
+            submit.setAttribute('name', 'id');
+            submit.setAttribute('value', productId);
+        });
+    </script>
     </body>
 </html>
 

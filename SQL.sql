@@ -22,7 +22,7 @@ CREATE TABLE Product (
     Category_Id INT NOT NULL,
     Product_Name VARCHAR(20) NOT NULL,
     Product_Price DECIMAL(10, 2) NOT NULL,
-    Product_Img mediumblob,
+    Product_Img mediumblob NOT NULL,
     Product_Stock INT NOT NULL,
     Product_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     foreign key (Category_Id) references Category(Category_Id)
@@ -53,3 +53,26 @@ CREATE TABLE Order_Product (
     foreign key (Transaction_Id) references Transaction(Transaction_Id)
 );
 
+
+DELIMITER //
+
+CREATE PROCEDURE Edit_Product (
+    IN in_Product_Id INT,
+    IN in_Category_Id INT,
+    IN in_Product_Name VARCHAR(255),
+    IN in_Product_Price DECIMAL(10,2),
+    IN in_Product_img VARCHAR(255),
+    IN in_Product_Stock INT
+)
+BEGIN
+    UPDATE Product
+    SET 
+        Category_Id = CASE WHEN in_Category_Id IS NOT NULL THEN in_Category_Id ELSE Category_Id END,
+        Product_Name = CASE WHEN in_Product_Name IS NOT NULL AND in_Product_Name != '' THEN in_Product_Name ELSE Product_Name END,
+        Product_Price = CASE WHEN in_Product_Price IS NOT NULL THEN in_Product_Price ELSE Product_Price END,
+        Product_img = CASE WHEN in_Product_img IS NOT NULL AND in_Product_img != '' THEN in_Product_img ELSE Product_img END,
+        Product_Stock = CASE WHEN in_Product_Stock IS NOT NULL THEN in_Product_Stock ELSE Product_Stock END
+    WHERE Product_Id = in_Product_Id;
+END //
+
+DELIMITER ;
