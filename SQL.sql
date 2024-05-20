@@ -41,14 +41,16 @@ CREATE TABLE Transaction (
     Transaction_Date TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
 
-CREATE TABLE Order_Products(
-	Order_ID INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    Product_ID INT NOT NULL,
-    Transaction_ID INT NOT NULL,
-    Customer_Id INT NOT NULL,
-    foreign key (Product_ID) references Product(Product_ID),
-    foreign key (Transaction_ID) references Transaction(Transaction_ID),
-    foreign key (Customer_Id) references Transaction(Customer_Id)
+
+CREATE TABLE Order_Product (
+	Order_Id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,a
+    Customer_Id INT NOT NULL, 
+    Product_Id INT NOT NULL,
+    Transaction_Id INT NOT NULL,
+    Quantity INT NOT NULL,
+    foreign key (Customer_Id) references Customer(Customer_Id),
+    foreign key (Product_Id) references Product(Product_Id),
+    foreign key (Transaction_Id) references Transaction(Transaction_Id)
 );
 
 
