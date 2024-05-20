@@ -1,4 +1,4 @@
-<?php
+<em?php
 include('include/Connection.php')
 ?>
 
@@ -76,7 +76,8 @@ include('include/Connection.php')
                 <div class="modal-body">
                     <form action="category/delete-category.php" method="post">
                         <div class="mb-3">
-                            <label for="removeCategoryButton" class="form-label">Are you sure do you want to remove <span id="categoryName"></span>?</label>
+                            <label for="removeCategoryButton" class="form-label">Are you sure do you want to remove <em id="categoryName"></em> category&quest;</label>
+                            <p><b>Note:</b> Deleting this category will also delete all products associated with it.</p>
                             <div class="modal-footer">
                                 <button class="btn btn-primary" type="submit" id="removeCategoryButton">Yes</button>
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
@@ -113,6 +114,8 @@ include('include/Connection.php')
             const row = event.relatedTarget.closest('tr');
             const id = row.getAttribute('data-category-id');
             const submit = document.querySelector('#deleteModal #removeCategoryButton');
+            const categoryName = document.querySelector('#deleteModal #categoryName');
+            categoryName.textContent = row.querySelector('.category-name').textContent;
             submit.setAttribute('name', 'id');
             submit.setAttribute('value', id);
         });
