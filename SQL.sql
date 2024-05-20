@@ -3,18 +3,17 @@ CREATE DATABASE shopping_cart;
 
 USE shopping_cart;
 
-
-CREATE TABLE category(
-	category_id INT PRIMARY KEY NOT NULL auto_increment,
-    category_name VARCHAR(200) NOT NULL UNIQUE
-);
-
 CREATE TABLE Seller (
     Seller_Id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
     First_Name VARCHAR(200) NOT NULL,
     Last_Name VARCHAR(200) NOT NULL,
     Address VARCHAR(200) NOT NULL,
     ContactNumber varchar(16) NOT NULL
+);
+
+CREATE TABLE category(
+	category_id INT PRIMARY KEY NOT NULL auto_increment,
+    category_name VARCHAR(200) NOT NULL UNIQUE
 );
 
 CREATE TABLE Product (
@@ -51,6 +50,32 @@ CREATE TABLE Order_Products(
     foreign key (Transaction_ID) references Transaction(Transaction_ID),
     foreign key (Customer_Id) references Transaction(Customer_Id)
 );
+
+
+CREATE VIEW Product_With_CategoryName as
+SELECT 
+    Product_Id,
+    Product.Category_Id,
+    Category_Name,
+    Product_Name,
+    Product_Price,
+    Product_Img,
+    Product_Stock,
+    Product_date
+FROM
+	Product,
+	Category
+WHERE
+	Product.Category_Id = Category.Category_Id;
+
+
+DELIMITER //
+CREATE PROCEDURE Force_Delete_Category (IN in_category_id INT)
+BEGIN
+	DELETE FROM Product WHERE Category_Id = in_category_id;
+	DELETE FROM category WHERE category_id = in_category_id;
+END //
+DELIMITER ;
 
 
 DELIMITER //

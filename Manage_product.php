@@ -50,7 +50,7 @@
         <table class="table">
             <thead>
                 <th scope="col">Product Id</th>
-                <th scope="col">Category Id</th>
+                <th scope="col">Category Name</th>
                 <th scope="col">Product Image</th>
                 <th scope="col">Product Name</th>
                 <th scope="col">Product Price</th>
@@ -64,8 +64,8 @@
                 foreach ($data as $row):?>
                 <tr scope="row" data-product-id="<?= $row['Product_Id'] ?>" data-product-name="<?= $row['Product_Name'] ?>" data-category-id="<?= $row['Category_Id'] ?>">
                     <td class="product-id"><?php echo $row['Product_Id']; ?></td>
-                    <td class="category-id"><?php echo $row['Category_Id'];  ?></td>
-                    <td class="product-img"><img src="<?php echo 'data:image/jpeg;base64,' . base64_encode($row['Product_Img']) ?>"></td> <!-- -->
+                    <td class="category-name"><?php echo $row['Category_Name'];  ?></td>
+                    <td class="product-img"><img src="<?php echo 'data:image/jpeg;base64,' . base64_encode($row['Product_Img']) ?>"></td>
                     <td class="product-name"><?php echo $row['Product_Name']; ?></td>
                     <td class="product-price"><?php echo $row['Product_Price']; ?></td>
                     <td class="product-stock"><?php echo $row['Product_Stock']; ?></td>
@@ -161,12 +161,13 @@
         document.querySelector('#editModal').addEventListener('show.bs.modal', (event) => {
             const row = event.relatedTarget.closest('tr');
             const productId = row.getAttribute('data-product-id');
+            const categoryId = row.getAttribute('data-category-id');
             const form = document.querySelector('#editModal form');
             const submit = form.querySelector('[type="submit"]');
             document.querySelector('#editModal #Product_Name').value = row.querySelector('.product-name').textContent;
             document.querySelector('#editModal #Product_Price').value = row.querySelector('.product-price').textContent;
             document.querySelector('#editModal #Product_Stock').value = row.querySelector('.product-stock').textContent;
-            document.querySelector('#editModal #category').value = row.querySelector('.category-id').textContent;
+            document.querySelector('#editModal #category').value = categoryId;
             submit.setAttribute('name', 'id');
             submit.setAttribute('value', productId);
         });

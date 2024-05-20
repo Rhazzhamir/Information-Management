@@ -26,6 +26,30 @@
             right: 0;
             margin-right: 20px;
         }
+        .product-image {
+            --size: 150px;
+            min-width: var(--size);
+            min-height: var(--size);
+            max-width: var(--size);
+            max-height: var(--size);
+            object-fit: cover;
+            object-position: center;
+            margin: auto;
+        }
+        .product {
+            width: 220px;
+            padding: 20px 20px 0 20px;
+            margin: 10px;
+        }
+        .add-to-cart-btn {
+            font-size: 14px;
+        }
+        .product .card-title {
+            font-size: 16px;
+        }
+        .product .card-text {
+            font-size: 14px;
+        }
     </style>
 </head>
 <body>
