@@ -6,7 +6,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
 }
 
 include('./include/Connection.php');
-$query = "SELECT * FROM Product";
+$query = "SELECT * FROM Product_With_CategoryName";
 $stmt = $connect->prepare($query);
 $stmt->execute();
 $result = $stmt->get_result();

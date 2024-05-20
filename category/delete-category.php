@@ -8,7 +8,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 $id = filter_input(INPUT_POST, "id", FILTER_VALIDATE_INT);
 try {
   include_once('../include/Connection.php');
-  $sql = "DELETE FROM Category WHERE Category_Id = ?";
+  $sql = "CALL Force_Delete_Category(?)";
   $stmt = $connect->prepare($sql);
   $stmt->bind_param("i", $id);
   $stmt->execute();
