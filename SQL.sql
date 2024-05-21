@@ -27,20 +27,37 @@ CREATE TABLE Product (
     foreign key (Category_Id) references Category(Category_Id)
 );
 
+
 CREATE TABLE Customer (
 	Customer_Id int not null primary key auto_increment,
     Name VARCHAR(255) not null,
     Address VARCHAR(255) not null,
-    ContactNo int not null,
-    Email VARCHAR(255) not null,
+    ContactNo VARCHAR(16) not null,
+    Email VARCHAR(255) not null unique,
     Password VARCHAR(255) not null
 );
+
+CREATE TABLE Cart (
+	Cart_Id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    Customer_Id INT NOT NULL,
+    Created_Date TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    foreign key (Customer_Id) references Customer(Customer_Id)
+);
+
+CREATE TABLE Cart_Product (
+	Cart_Id INT NOT NULL,
+    Product_Id INT NOT NULL,
+    Quantity INT NOT NULL,
+    foreign key (Cart_Id) references Cart(Cart_Id),
+    foreign key (Product_Id) references Product(Product_Id),
+    primary key (Cart_Id, Product_Id)
+);
+
 
 CREATE TABLE Transaction (
 	Transaction_ID INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
     Transaction_Date TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
-
 
 CREATE TABLE Order_Product (
 	Order_Id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
@@ -70,7 +87,7 @@ FROM
 WHERE
 	Product.Category_Id = Category.Category_Id;
 
-
+-- DELETE
 DELIMITER //
 CREATE PROCEDURE Force_Delete_Category (IN in_category_id INT)
 BEGIN
@@ -80,6 +97,7 @@ END //
 DELIMITER ;
 
 
+-- EDIT
 DELIMITER //
 
 CREATE PROCEDURE Edit_Product (
@@ -99,6 +117,25 @@ BEGIN
         Product_Stock = CASE WHEN in_Product_Stock IS NOT NULL THEN in_Product_Stock ELSE Product_Stock END
     WHERE Product_Id = in_Product_Id;
     UPDATE Product SET Product_img = in_Product_img WHERE in_Product_img IS NOT NULL;
+END //
+
+DELIMITER ;
+
+
+DELIMITER //
+
+CREATE PROCEDURE Customer_With_Cart (
+	IN in_name VARCHAR(255),
+    IN in_address VARCHAR(255),
+    IN in_contact VARCHAR(255),
+    IN in_email VARCHAR(255),
+    IN in_password VARCHAR(255)
+)
+BEGIN
+    INSERT INTO Customer (Name, Address, ContactNo, Email, Password)
+    VALUES (in_name, in_address, in_contact, in_email, in_password);
+    INSERT INTO Cart (Customer_Id) VALUES
+    ((SELECT Customer_Id FROM Customer WHERE Email = in_email));
 END //
 
 DELIMITER ;
