@@ -15,14 +15,14 @@ $contactNo = filter_var($data["ContactNumber"], FILTER_SANITIZE_SPECIAL_CHARS);
 $address = filter_var($data["Address"], FILTER_SANITIZE_SPECIAL_CHARS);
 
 
-$conn = mysqli_connect($con, $username, $password, $dbname);
+$connect = mysqli_connect($con, $username, $password, $dbname);
 $sql = "UPDATE Seller SET
 First_Name = ?, LAST_NAME = ?,
 ContactNumber = ?, Address = ?
 WHERE Seller_Id = ?";
 
-$stmt = $conn->prepare($sql);
+$stmt = $connect->prepare($sql);
 $stmt->bind_param("ssssi", $fname, $lname, $contactNo, $address, $SellerID);
 $stmt->execute();
 $stmt->close();
-$conn->close();
+$connect->close();

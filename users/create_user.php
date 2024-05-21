@@ -14,13 +14,13 @@ echo $contactNo . '<br>';
 echo $address . '<br>';
 
 
-$conn = mysqli_connect($con, $username, $password, $dbname);
+$connect = mysqli_connect($con, $username, $password, $dbname);
 $sql = "INSERT INTO Seller (First_Name, Last_Name, Address, ContactNumber)
 VALUES (?, ?, ?, ?);";
-$stmt = $conn->prepare($sql);
+$stmt = $connect->prepare($sql);
 $stmt->bind_param("ssss", $fname, $lname, $address, $contactNo);
 $stmt->execute();
 $stmt->close();
-$conn->close();
+$connect->close();
 
 header("Location: ../Register_User.php");

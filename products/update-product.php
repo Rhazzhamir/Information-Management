@@ -23,8 +23,6 @@ $product_img_extension = strtolower(pathinfo($product_img['name'], PATHINFO_EXTE
 
 if ($product_img_size >= $maxFileSize || !in_array($product_img_extension, $allowedExtension)) {
     $product_img_data = null;
-    echo "Upload error";
-    exit;
 } else {
     $product_img_data = file_get_contents($product_img['tmp_name']);
 }
