@@ -20,7 +20,6 @@ myInput.focus()
 
 // })
 
-
 document.addEventListener('DOMContentLoaded', () => {
     const btnProfile = document.querySelector('#btnProfile');
     const profileNameDisplay = document.querySelector('#profileNameDisplay');
