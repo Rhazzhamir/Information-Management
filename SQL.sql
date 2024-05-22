@@ -139,3 +139,12 @@ BEGIN
 END //
 
 DELIMITER ;
+
+
+DELIMITER //
+CREATE PROCEDURE Force_Delete_Product( IN in_id int)
+BEGIN
+	DELETE FROM Cart_Product WHERE Product_Id = in_id;
+    DELETE FROM Product WHERE Product_Id = in_id;
+END //
+DELIMITER ;
