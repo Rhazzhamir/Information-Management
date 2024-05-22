@@ -131,10 +131,12 @@ if (!isset($_SESSION['id'])) {
           <th scope="col">Product Name</th>
           <th scope="col">Product Price</th>
           <th scope="col">Quantity</th>
+          <th>Selext</th>
         </tr>
       </thead>
       <tbody>
         <?php
+          $totalAmount = 0;
           include('./include/Connection.php');
           $sql ="SELECT
 	                Cart_Product.Cart_Id,
@@ -159,16 +161,21 @@ if (!isset($_SESSION['id'])) {
             <tr scope="row" data-product-id="<?php echo $row['Product_Id'] ?>">
               <td><?php echo $row['Product_Id']?></td>
               <td><img class="product-img" src="<?php echo 'data:image/jpeg;base64,' . base64_encode($row['Product_Img'])?>"></td>
-              <td><?php echo $row['Product_Price']?></td>
               <td><?php echo $row['Product_Name']?></td>
-              <td><?php echo $row['Quantity']?></td>
+              <td><?php echo $row['Product_Price']?></td>
+              <td><input type="number" value="<?php echo $row['Quantity']?>"></td>
+              <td><input type="checkbox"></td>
             </tr>
+            <?php 
+              $totalAmount += $row['Product_Price'] * $row['Quantity'] ;
+            ?>
           <?php endforeach ?>
       </tbody>
     </table>
-
-    <script>
-    </script>
+      <div class="total"><?php echo $totalAmount?>Total Amount</div>
+    <div class="d-flex  justify-content-end">
+      <button type="button" class="btn btn-success m-3">Check out</button>
+    </div>
     </body>
 </html>
 

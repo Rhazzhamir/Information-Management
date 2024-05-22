@@ -41,4 +41,4 @@ $stmt->bind_param("isdsi", $category_id, $product_name, $product_price, $product
 $stmt->execute();
 $stmt->close();
 $connect->close();
-header("Location: ../Manage_product.php");
+header("Location: ../index.php");

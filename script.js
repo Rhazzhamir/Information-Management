@@ -36,6 +36,8 @@ document.addEventListener('DOMContentLoaded', () => {
             .then(data => {
                 if (data) {
                     alert(data);
+                }else{
+                    window.location.href = 'cart.php';
                 }
             }).catch(e => alert(e));
         }
