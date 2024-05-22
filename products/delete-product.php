@@ -8,7 +8,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 $id = filter_input(INPUT_POST, "id", FILTER_VALIDATE_INT);
 
 include('../include/Connection.php');
-$sql = "DELETE FROM Product WHERE Product_Id = ?";
+$sql = "CALL Force_Delete_Product(?)";
 $stmt = $connect->prepare($sql);
 $stmt->bind_param("i", $id);
 $stmt->execute();

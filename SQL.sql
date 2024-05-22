@@ -39,7 +39,7 @@ CREATE TABLE Customer (
 
 CREATE TABLE Cart (
 	Cart_Id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    Customer_Id INT NOT NULL,
+    Customer_Id INT NOT NULL UNIQUE,
     Created_Date TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     foreign key (Customer_Id) references Customer(Customer_Id)
 );
@@ -138,4 +138,13 @@ BEGIN
     ((SELECT Customer_Id FROM Customer WHERE Email = in_email));
 END //
 
+DELIMITER ;
+
+
+DELIMITER //
+CREATE PROCEDURE Force_Delete_Product( IN in_id int)
+BEGIN
+	DELETE FROM Cart_Product WHERE Product_Id = in_id;
+    DELETE FROM Product WHERE Product_Id = in_id;
+END //
 DELIMITER ;
