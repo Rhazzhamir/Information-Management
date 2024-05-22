@@ -247,6 +247,10 @@
                     <form action="products/delete-product.php" method="post">
                         <div class="mb-3">
                             <label for="removeProductButton" class="form-label">Are you sure do you want to remove <span id="productName"></span>?</label>
+                            <p>
+                                <b>Note: </b>
+                                This product will also delete this product to the customer cart.
+                            </p>
                             <div class="modal-footer">
                                 <button class="btn btn-primary" type="submit" id="removeProductButton">Yes</button>
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
