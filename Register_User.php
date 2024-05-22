@@ -1,4 +1,4 @@
-<button?php 
+<?php 
 include('include/Connection.php');
 ?>
 

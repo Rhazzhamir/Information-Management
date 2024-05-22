@@ -7,8 +7,73 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
         <title>Manage_product</title>
         <style>
-            .back{
-                margin: 20px 0 0 50px;
+            .box {
+            width: 100px;
+            height: 35px;
+            float: left;
+            transition: .5s linear;
+            position: relative;
+            display: block;
+            overflow: hidden;
+            padding: 5px;
+            margin: 5px 0 0 45px;
+            text-align: center;
+            background: transparent;
+            text-transform: uppercase;
+            font-weight: 900;
+            }
+
+            .box:before {
+            position: absolute;
+            content: '';
+            left: 0;
+            bottom: 0;
+            height: 4px;
+            width: 100%;
+            border-bottom: 4px solid transparent;
+            border-left: 4px solid transparent;
+            box-sizing: border-box;
+            transform: translateX(100%);
+            }
+
+            .box:after {
+            position: absolute;
+            content: '';
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            border-top: 4px solid transparent;
+            border-right: 4px solid transparent;
+            box-sizing: border-box;
+            transform: translateX(-100%);
+            }
+
+            .box:hover {
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+            }
+
+            .box:hover:before {
+            border-color: #262626;
+            height: 100%;
+            transform: translateX(0);
+            transition: .3s transform linear, .3s height linear .3s;
+            }
+
+            .box:hover:after {
+            border-color: #262626;
+            height: 100%;
+            transform: translateX(0);
+            transition: .3s transform linear, .3s height linear .5s;
+            }
+
+            button {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+            outline: none;
+            border: none;
+            background: transparent;
             }
             form.mb-3 > input{
                 width: 500px;
@@ -29,6 +94,64 @@
                 object-fit: cover;
                 object-position: center;
             }
+            /* addButton-modal */
+            .button {
+                position: relative;
+                width: 150px;
+                height: 40px;
+                cursor: pointer;
+                display: flex;
+                align-items: center;
+                border: 1px solid #34974d;
+                background-color: #3aa856;
+                }
+
+                .button, .button__icon, .button__text {
+                transition: all 0.3s;
+                }
+
+                .button .button__text {
+                transform: translateX(30px);
+                color: #fff;
+                font-weight: 600;
+                }
+
+                .button .button__icon {
+                position: absolute;
+                transform: translateX(109px);
+                height: 100%;
+                width: 39px;
+                background-color: #34974d;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                }
+
+                .button .svg {
+                width: 30px;
+                stroke: #fff;
+                }
+
+                .button:hover {
+                background: #34974d;
+                }
+
+                .button:hover .button__text {
+                color: transparent;
+                }
+
+                .button:hover .button__icon {
+                width: 148px;
+                transform: translateX(0);
+                }
+
+                .button:active .button__icon {
+                background-color: #2e8644;
+                }
+
+                .button:active {
+                border: 1px solid #2e8644;
+                }
         </style>
     </head>
     <body>
@@ -37,7 +160,9 @@
             <h5>Register Product</h5>
         </div>
         <a href="index.php">
-            <button class="back btn btn-primary">Back</button>
+            <button>
+                <span class="box">Back</span>
+            </button>        
         </a>
         <div class=" p-5 mb-5border border-1px-red card-body">
             <form action="./products/add-product.php" method="post" enctype="multipart/form-data">
@@ -45,18 +170,6 @@
             </form>
         </div>
     </div>
-
-
-
-
-
-
-
-
-
-
-
-
 
     <div class="card  m-5">
         <table class="table">
@@ -111,7 +224,11 @@
                             <input id="addCategoryInput" type="text" class="form-control" name="category_name">
                         </div>
                         <div class="modal-footer">
-                            <button type="submit" class="btn btn-success">Add</button>
+                            <!-- <button type="submit" class="btn btn-success">Add</button> -->
+                            <button type="submit" class="button">
+                                <span class="button__text">Add Item</span>
+                                <span class="button__icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" viewBox="0 0 24 24" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" stroke="currentColor" height="24" fill="none" class="svg"><line y2="19" y1="5" x2="12" x1="12"></line><line y2="12" y1="12" x2="19" x1="5"></line></svg></span>
+                            </button>
                         </div>
                     </form>
                 </div>
