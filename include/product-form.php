@@ -23,9 +23,9 @@
         <option value="<?= $row['category_id'] ?>"><?= $row['category_name'] ?></option>
         <?php endforeach ?>
     </select>
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#categoryModal">
+    <button type="button" class="Add-Category-Btn btn-primary" data-bs-toggle="modal" data-bs-target="#categoryModal">
         Add Category
     </button>
 </div>
 
-<button type="submit" class="btn btn-success">Save</button>
+<button type="submit" class="Save-btn btn-success">Save</button>

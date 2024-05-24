@@ -11,10 +11,48 @@ if (isset($_SESSION['id'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f0f2f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .register-container {
+            background-color: white;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+        }
+        .register-title {
+            font-size: 2em;
+            margin-bottom: 20px;
+            text-align: center;
+            color: #1877f2;
+        }
+        .form-group label {
+            font-weight: bold;
+        }
+        .btn-primary {
+            background-color: #1877f2;
+            border: none;
+        }
+        .btn-primary:hover {
+            background-color: #145dbf;
+        }
+        .login-link {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
 </head>
 <body>
-    <div class="container">
-        <h2 class="mt-5">Register</h2>
+    <div class="register-container">
+        <h2 class="register-title">Register</h2>
         <form action="process.php" method="post">
             <div class="form-group">
                 <label for="name">Name:</label>
@@ -36,11 +74,9 @@ if (isset($_SESSION['id'])) {
                 <label for="password">Password:</label>
                 <input type="password" class="form-control" id="password" name="password" required>
             </div>
-            <button type="submit" class="btn btn-primary">Register</button>
+            <button type="submit" class="btn btn-primary btn-block">Register</button>
         </form>
-        <div class="mt-3">
-          <a href="../login/">Login Account</a>
-        </div>
+        <a href="../login/" class="login-link">Login Account</a>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>

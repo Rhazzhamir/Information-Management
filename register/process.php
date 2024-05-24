@@ -32,8 +32,11 @@ $sql = "CALL Customer_With_Cart(?, ?, ?, ?, ?)";
 $stmt = $connect->prepare($sql);
 $stmt->bind_param("sssss", $name, $address, $contactno, $email, $password);
 if ($stmt->execute()) {
-    echo "<h1>Registration successful</h1>";
-    echo '<a href="../login">Login</a>';
+  echo "<script>
+          alert('Registration successful')
+          window.location.href = '../login'
+        </script>";
+
 } else {
     echo "Error: " . $sql . "<br>" . $connect->error;
 }

@@ -87,6 +87,43 @@ include('include/Connection.php')
                 border: none;
                 background: transparent;
                 }
+
+                /* Back */
+                    .Back-Button{
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        outline: none;
+                        cursor: pointer;
+                        width: 90px;
+                        height: 35px;
+                        background-image: linear-gradient(to top, #D8D9DB 0%, #fff 80%, #FDFDFD 100%);
+                        border-radius: 10px;
+                        border: 1px solid black;
+                        transition: all 0.2s ease;
+                        font-family: "Source Sans Pro", sans-serif;
+                        font-size: 14px;
+                        font-weight: 600;
+                        color: black;
+                        text-shadow: 0 1px #fff;
+                        }
+                        .back{
+                            text-decoration: none;
+                        }
+                        .Back-Button:hover{
+                            /* CSS styles for hover state */
+                            box-shadow: 0 4px 3px 1px gray, 0 6px 8px #D6D7D9, 0 -4px 4px #CECFD1, 0 -6px 4px #FEFEFE, inset 0 0 3px 3px #CECFD1;
+                        }
+
+                        .Back-Button:active{
+                            /* CSS styles for active state */
+                            box-shadow: 0 4px 3px 1px #FCFCFC, 0 6px 8px #D6D7D9, 0 -4px 4px #CECFD1, 0 -6px 4px #FEFEFE, inset 0 0 5px 3px #999, inset 0 0 30px #aaa;
+                        }
+
+                        .Back-Button:focus {
+                            /* CSS styles for focus state */
+                            box-shadow: 0 4px 3px 1px #FCFCFC, 0 6px 8px #D6D7D9, 0 -4px 4px #CECFD1, 0 -6px 4px #FEFEFE, inset 0 0 5px 3px #999, inset 0 0 30px #aaa;
+                        }
         </style>
     </head>
     <body>
@@ -94,12 +131,8 @@ include('include/Connection.php')
             <div class="card-header  mb-3 p-4 text-white text-center bg-secondary">
                 <h5>Register Category</h5>
             </div>
-            <a href="index.php">
-                <button class="back ">
-                    <span class="box">
-                        Back
-                    </span>
-                </button>
+            <a class="back" href="index.php">
+                <button class="Back-Button">Back</button>     
             </a>
             <div class=" p-5 mb-5border border-1px-red card-body">
                 <form action="./category/add-category.php" method="post">

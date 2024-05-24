@@ -11,10 +11,53 @@ if (isset($_SESSION['id'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f0f2f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .login-container {
+            background-color: white;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+        }
+        .login-title {
+            font-size: 2em;
+            margin-bottom: 20px;
+            text-align: center;
+            color: #1877f2;
+        }
+        .form-group label {
+            font-weight: bold;
+        }
+        .btn-primary {
+            background-color: #1877f2;
+            border: none;
+        }
+        .btn-primary:hover {
+            background-color: #145dbf;
+        }
+        .create-account-link {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+        }
+        .error-message {
+            color: red;
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
 </head>
 <body>
-    <div class="container">
-        <h2 class="mt-5">Login</h2>
+    <div class="login-container">
+        <h2 class="login-title">Login</h2>
         <form action="process.php" method="post">
             <div class="form-group">
                 <label for="email">Email:</label>
@@ -24,12 +67,10 @@ if (isset($_SESSION['id'])) {
                 <label for="password">Password:</label>
                 <input type="password" class="form-control" id="password" name="password" required>
             </div>
-            <button type="submit" class="btn btn-primary">Login</button>
+            <button type="submit" class="btn btn-primary btn-block">Login</button>
         </form>
-        <div class="mt-4">
-            <a href="../register/">Create Account</a>
-        </div>
-        <p class="color-danger">
+        <a href="../register/" class="create-account-link">Create Account</a>
+        <p class="error-message">
             <?php
             if (isset($_SESSION['error'])) {
                 echo $_SESSION['error'];
