@@ -150,7 +150,8 @@ include('include/Connection.php')
             <thead>
                 <th scope="col">Category Id</th>
                 <th scope="col">Category Name</th>
-                <th scope="col">Action</th>
+                <th scope="col">Update</th>
+                <th scope="col">Delete</th>
             </thead>
             <tbody>
             <?php include('./category/get-categories.php');
@@ -162,9 +163,14 @@ include('include/Connection.php')
                         <button type="button" class="btn btn-success update-button" data-bs-toggle="modal" data-bs-target="#editModal">
                             Update
                         </button>
+                    </td>
+                    <td>
                         <button type="button" class="btn btn-danger delete-button" data-bs-toggle="modal" data-bs-target="#deleteModal">
                             Delete
                         </button>
+                    </td>
+                    <td>
+
                     </td>
                 </tr>
             <?php endforeach ?>

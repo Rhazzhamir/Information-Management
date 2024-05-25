@@ -24,7 +24,7 @@ CREATE TABLE Product (
     Product_Img mediumblob NOT NULL,
     Product_Stock INT NOT NULL,
     Product_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    foreign key (Category_Id) references Category(Category_Id)
+    foreign key (Category_Id) references Category(Category_Id) on delete cascade
 );
 
 
@@ -41,18 +41,17 @@ CREATE TABLE Cart (
 	Cart_Id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     Customer_Id INT NOT NULL UNIQUE,
     Created_Date TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    foreign key (Customer_Id) references Customer(Customer_Id)
+    foreign key (Customer_Id) references Customer(Customer_Id) on delete cascade
 );
 
 CREATE TABLE Cart_Product (
 	Cart_Id INT NOT NULL,
     Product_Id INT NOT NULL,
     Quantity INT NOT NULL,
-    foreign key (Cart_Id) references Cart(Cart_Id),
-    foreign key (Product_Id) references Product(Product_Id),
+    foreign key (Cart_Id) references Cart(Cart_Id) on delete cascade,
+    foreign key (Product_Id) references Product(Product_Id) on delete cascade,
     primary key (Cart_Id, Product_Id)
 );
-
 
 CREATE TABLE Transaction (
 	Transaction_ID INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
@@ -65,9 +64,9 @@ CREATE TABLE Order_Product (
     Product_Id INT NOT NULL,
     Transaction_Id INT NOT NULL,
     Quantity INT NOT NULL,
-    foreign key (Customer_Id) references Customer(Customer_Id),
-    foreign key (Product_Id) references Product(Product_Id),
-    foreign key (Transaction_Id) references Transaction(Transaction_Id)
+    foreign key (Customer_Id) references Customer(Customer_Id) on delete cascade,
+    foreign key (Product_Id) references Product(Product_Id) on delete cascade,
+    foreign key (Transaction_Id) references Transaction(Transaction_Id) on delete cascade
 );
 
 
@@ -88,13 +87,13 @@ WHERE
 	Product.Category_Id = Category.Category_Id;
 
 -- DELETE
-DELIMITER //
-CREATE PROCEDURE Force_Delete_Category (IN in_category_id INT)
-BEGIN
-	DELETE FROM Product WHERE Category_Id = in_category_id;
-	DELETE FROM category WHERE category_id = in_category_id;
-END //
-DELIMITER ;
+-- DELIMITER //
+-- CREATE PROCEDURE Force_Delete_Category (IN in_category_id INT)
+-- BEGIN
+-- 	DELETE FROM Product WHERE Category_Id = in_category_id;
+-- 	DELETE FROM category WHERE category_id = in_category_id;
+-- END //
+-- DELIMITER ;
 
 
 -- EDIT
@@ -141,10 +140,10 @@ END //
 DELIMITER ;
 
 
-DELIMITER //
-CREATE PROCEDURE Force_Delete_Product( IN in_id int)
-BEGIN
-	DELETE FROM Cart_Product WHERE Product_Id = in_id;
-    DELETE FROM Product WHERE Product_Id = in_id;
-END //
-DELIMITER ;
+-- DELIMITER //
+-- CREATE PROCEDURE Force_Delete_Product( IN in_id int)
+-- BEGIN
+-- 	DELETE FROM Cart_Product WHERE Product_Id = in_id;
+--     DELETE FROM Product WHERE Product_Id = in_id;
+-- END //
+-- DELIMITER ;

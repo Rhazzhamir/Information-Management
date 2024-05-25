@@ -242,7 +242,7 @@ if (!isset($_SESSION['id'])) {
             }
         </style>
     </head>
-    <body>
+    <body data-customer-id="<?php echo $_SESSION['id']?>" data-cart-id="<?php $_SESSION['cart_id']?>">
     <div>
         <div class="mb-2 p-4 text-white d-flex align-items-center bg-secondary">
           <h5 class="m-auto"><?php echo $_SESSION['name'] . "&nbsp;&nbsp;"?>'s Cart</h5>
@@ -257,7 +257,7 @@ if (!isset($_SESSION['id'])) {
           </button>
         </a>
       </div>
-  
+    
     <table class="table m-4">
       <thead>
         <tr>
@@ -269,7 +269,7 @@ if (!isset($_SESSION['id'])) {
           <th>Selext</th>
         </tr>
       </thead>
-      <tbody>
+      <tbody id="products_list">
         <?php
           $totalAmount = 0;
           include('./include/Connection.php');
@@ -293,17 +293,17 @@ if (!isset($_SESSION['id'])) {
           $result = $stmt->get_result();
           $data = $result->fetch_all(MYSQLI_ASSOC);
           foreach ($data as $row):?>
-            <tr scope="row" data-product-id="<?php echo $row['Product_Id'] ?>">
+            <tr class="product" scope="row" data-product-id="<?php echo $row['Product_Id'] ?>">
               <td><?php echo $row['Product_Id']?></td>
               <td><img class="product-img" src="<?php echo 'data:image/jpeg;base64,' . base64_encode($row['Product_Img'])?>"></td>
               <td><?php echo $row['Product_Name']?></td>
-              <td><?php echo $row['Product_Price']?></td>
-              <td><input type="number" value="<?php echo $row['Quantity']?>"></td>
+              <td class="price"><?php echo $row['Product_Price']?></td>
+              <td><input class="qty" type="number" value="<?php echo $row['Quantity']?>" oninput="calculateTotalAmt()"></td>
               <!-- CHECKBOX -->
               <td>
                 <div class="checkbox-wrapper-12">
                   <div class="cbx">
-                    <input checked="" type="checkbox" id="cbx-12">
+                    <input class="cbx-product" type="checkbox" id="cbx-12">
                     <label for="cbx-12"></label>
                     <svg fill="none" viewBox="0 0 15 14" height="14" width="15">
                       <path d="M2 8.36364L6.23077 12L13 2"></path>
@@ -316,21 +316,71 @@ if (!isset($_SESSION['id'])) {
                         <feColorMatrix result="goo-12" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 22 -7" mode="matrix" in="blur"></feColorMatrix>
                         <feBlend in2="goo-12" in="SourceGraphic"></feBlend>
                       </filter>
-                    </defs>
+                    </defs> 
                   </svg>
                 </div>            
               </td>
             </tr>
-            <?php 
-              $totalAmount += $row['Product_Price'] * $row['Quantity'] ;
-            ?>
           <?php endforeach ?>
       </tbody>
     </table>
-      <div class="total"><?php echo $totalAmount?>Total Amount</div>
+      <div class="total"><b>Total Amount:</b> <span id="totalAmount">0.00</span></div>
     <div class="d-flex  justify-content-end">
-      <button type="button" class="btn btn-success m-3">Check out</button>
+      <button type="button" id="checkout_btn" class="btn btn-success m-3">Check out</button>
     </div>
+
+    <script>
+      function redirectPost(url, data) {
+          const form = document.createElement('form');
+          document.body.appendChild(form);
+          form.method = 'post';
+          form.action = url;
+          for (let name in data) {
+              const input = document.createElement('input');
+              input.type = 'hidden';
+              input.name = name;
+              input.value = data[name];
+              form.appendChild(input);
+          }
+          form.submit();
+      }
+    
+      const checkout_btn = document.getElementById('checkout_btn');
+      checkout_btn.addEventListener('click', e => {
+        const products = Array.from(document.getElementById('products_list').children);
+        const products_list = [];
+        const formData = {};
+        formData.customer_id = document.body.getAttribute('data-customer-id');
+        formData.card_id = document.body.getAttribute('data-cart-id');
+        products.forEach(element => {
+          if(element.querySelector('#cbx-12').checked){
+            products_list.push(element.getAttribute('data-product-id'));
+          }
+        });
+        formData.products_id_list = JSON.stringify(products_list);
+        redirectPost('checkout.php', formData);
+      });
+
+
+
+      function calculateTotalAmt() {
+        let total = 0;
+          document.querySelectorAll('.cbx-product:checked').forEach(elem => {
+            const row = elem.closest('.product[scope="row"]');
+            const quantiy = row.querySelector('.qty').value;
+            const price = row.querySelector('.price').textContent;
+            total += quantiy * price;
+          });
+          document.getElementById('totalAmount').textContent = total;
+      }
+
+      document.addEventListener('click', event => {
+        const cbx = event.target.closest('.cbx-product');
+        if (cbx) {
+          calculateTotalAmt();
+        }
+      });
+    </script>
     </body>
 </html>
 
