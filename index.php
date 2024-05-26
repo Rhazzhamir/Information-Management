@@ -129,7 +129,7 @@ if (!isset($_SESSION['id'])) {
                     <span class="quantity"></span>
                 </a data-quantity>
                 <form class="search_bar d-flex" role="search">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                    <input class="form-control me-2" type="search" placeholder="Search Shoes" aria-label="Search">
                     <button class="btn btn-outline-success" type="submit">Search</button>
                 </form>
             </div>
