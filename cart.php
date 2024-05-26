@@ -3,6 +3,7 @@ session_start();
 if (!isset($_SESSION['id'])) {
   header("Location: ./login");
 }
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -283,7 +284,7 @@ if (!isset($_SESSION['id'])) {
                         }
         </style>
     </head>
-    <body data-customer-id="<?php echo $_SESSION['id']?>" data-cart-id="<?php $_SESSION['cart_id']?>">
+    <body data-customer-id="<?php echo $_SESSION['id']?>" data-cart-id="<?php echo $_SESSION["cart_id"]?>">
     <div>
         <div class="mb-2 p-4 text-white d-flex align-items-center bg-secondary">
           <h5 class="m-auto">Shopping Cart</h5>
@@ -388,7 +389,7 @@ if (!isset($_SESSION['id'])) {
         const products_list = [];
         const formData = {};
         formData.customer_id = document.body.getAttribute('data-customer-id');
-        formData.card_id = document.body.getAttribute('data-cart-id');
+        formData.cart_id = document.body.getAttribute('data-cart-id');
         products.forEach(element => {
           if(element.querySelector('#cbx-12').checked){
             products_list.push(element.getAttribute('data-product-id'));

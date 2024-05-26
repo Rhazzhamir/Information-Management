@@ -1,7 +1,3 @@
-<?php
-// var_dump($_POST);
-?>
-
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -286,6 +282,12 @@
                 <div class="shine">ITshoeStore</div>
             </div>
             
+            <?php
+            include('./include/Connection.php');
+            $stmt = $connect->prepare("SELECT customer_id id, name, address, contactno, email FROM Customer WHERE Customer_ID = ?");
+            $stmt->execute([$_POST['cart_id']]);
+            $customers = $stmt->get_result()->fetch_assoc();
+            ?>
             <div >
                 <h4>Invoice / Receipt</h4>
                 <table>
@@ -293,7 +295,7 @@
                         <tr>
                             <td>
                                 <strong>
-                                Customer_Id:
+                                Customer_Id: <?php echo $customers['id'] ?>
                                 </strong>
                             </td>
                             <td></td>
@@ -301,7 +303,7 @@
                         <tr>
                             <td>
                                 <strong>
-                                Name:
+                                Name: <?php echo $customers['name']?>
                                 </strong>
                             </td>
                             <td></td>
@@ -309,7 +311,7 @@
                         <tr>
                             <td>
                                 <strong>
-                                    Address:
+                                    Address: <?php echo $customers['address'] ?>
                                 </strong>
                             </td>
                             <td></td>
@@ -317,14 +319,16 @@
                         <tr>
                             <td>
                                 <strong>
-                                    Contact Number:
+                                    Contact Number: <?php echo $customers['contactno'] ?>
                                 </strong>
                             </td>
                             <td></td>
                         </tr>
                         <tr>
                             <td>
-                                <strong>Email:</strong>
+                                <strong>
+                                    Email: <?php echo $customers['email'] ?>
+                                </strong>
                             </td>
                             <td></td>
                         </tr>
@@ -336,32 +340,42 @@
         <div class="card-table m-3">
             <table class="table border border-secondary">
                 <thead>
-                <th scope="col">Product Id</th>
-                <th scope="col">Product Image</th>
-                <th scope="col">Product Name</th>
-                <th scope="col">Quantity</th>
-                <th scope="col">Product Price</th>
+                    <tr>
+                        <th scope="col">Product Id</th>
+                        <th scope="col">Product Image</th>
+                        <th scope="col">Product Name</th>
+                        <th scope="col">Quantity</th>
+                        <th scope="col">Product Price</th>
+                    </tr>
                 </thead>
-                <tbody >
-                    <tr>
-                        <td>1</td>
-                        <td>png</td>
-                        <td>Rhazzhamir</td>
-                        <td>2</td>
-                        <td>150</td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>jpg</td>
-                        <td>Rhass</td>
-                        <td>43</td>
-                        <td>1640</td>
-                    </tr>
+                <?php $totalAmount = 0; ?>
+                <tbody id="receipt">
+                    <?php
+                    include('./products/get-product-by-id.php');
+                    $products = json_decode($_POST['products_id_list']);
+                    $cart_id = $_POST["cart_id"];
+                    foreach ($products as $product) {
+                        $data = getProductById($product, $cart_id);
+                        $p = base64_encode($data['Product_Img']);
+                        echo "<tr>";
+                        echo "<td>{$data['Product_Id']}</td>";
+                        echo "<td><img style=\"width: 120px; height: 120px;\" src=\"data:image/jpeg;base64,{$p}\"></td>";
+                        echo "<td>{$data['Product_Name']}</td>";
+                        echo "<td>{$data['Quantity']}</td>";
+                        echo "<td>{$data['Product_Price']}</td>";
+                        echo "</tr>";
+                        $totalAmount += $data['Quantity'] * $data['Product_Price'];
+                    }
+                    ?>
                 </tbody>
+                <caption>
+                </caption>
             </table>
             <div class="total d-flex justify-content-around align-items-end p-1">
                 <b>Total Amount:</b> 
-                <b id="totalAmount">0.00</b>
+                <b id="totalAmount">
+                    <?php echo $totalAmount; ?>
+                </b>
             </div>
         </div>
     </div>
