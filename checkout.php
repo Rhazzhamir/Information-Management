@@ -58,7 +58,7 @@
                     position: relative;
                     cursor: pointer;
                     overflow: hidden;
-                    margin-top: 20px;
+                    margin-top: 10px;
                     width: 250px;
                     }
 
@@ -263,7 +263,7 @@
     <body>
     <div class="card text-center">
         <div class="card-header pt-4">
-            <div class="shine">View Invoices</div>
+            <div class="shine">Order Summary</div>
         </div>  
         <div class="d-flex justify-content-between ">
             <div>
@@ -271,13 +271,8 @@
                     <button class="Back-Button">Cancel</button>     
                 </a>
             </div>
-            <div>
-            <button type="button" class="Edit-Button" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                Edit
-            </button>
-            </div>
         </div>
-        <div class="d-flex justify-content-around align-items-center" style="height: 40vh;" >
+        <div class="d-flex justify-content-around align-items-center" style="height: 30vh;" >
             <div >
                 <div class="shine">ITshoeStore</div>
             </div>
@@ -295,42 +290,42 @@
                         <tr>
                             <td>
                                 <strong>
-                                Customer_Id: <?php echo $customers['id'] ?>
+                                Customer_Id: 
                                 </strong>
                             </td>
-                            <td></td>
+                            <td><?php echo $customers['id'] ?></td>
                         </tr>
                         <tr>
                             <td>
                                 <strong>
-                                Name: <?php echo $customers['name']?>
+                                Name: 
                                 </strong>
                             </td>
-                            <td></td>
+                            <td><?php echo $customers['name']?></td>
                         </tr>
                         <tr>
                             <td>
                                 <strong>
-                                    Address: <?php echo $customers['address'] ?>
+                                    Address:
                                 </strong>
                             </td>
-                            <td></td>
+                            <td> <?php echo $customers['address'] ?></td>
                         </tr>
                         <tr>
                             <td>
                                 <strong>
-                                    Contact Number: <?php echo $customers['contactno'] ?>
+                                    Contact Number: 
                                 </strong>
                             </td>
-                            <td></td>
+                            <td><?php echo $customers['contactno'] ?></td>
                         </tr>
                         <tr>
                             <td>
                                 <strong>
-                                    Email: <?php echo $customers['email'] ?>
+                                    Email: 
                                 </strong>
                             </td>
-                            <td></td>
+                            <td><?php echo $customers['email'] ?></td>
                         </tr>
                     </tbody>
                 </table>
@@ -359,7 +354,7 @@
                         $p = base64_encode($data['Product_Img']);
                         echo "<tr>";
                         echo "<td>{$data['Product_Id']}</td>";
-                        echo "<td><img style=\"width: 120px; height: 120px;\" src=\"data:image/jpeg;base64,{$p}\"></td>";
+                        echo "<td><img style=\"width: 50px; height: 50px;\" src=\"data:image/jpeg;base64,{$p}\"></td>";
                         echo "<td>{$data['Product_Name']}</td>";
                         echo "<td>{$data['Quantity']}</td>";
                         echo "<td>{$data['Product_Price']}</td>";
@@ -390,7 +385,7 @@
         </button>
     </div>
     <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <!-- <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
             <div class="modal-header">
@@ -430,7 +425,7 @@
             </div>
             </div>
         </div>
-    </div>
+    </div> -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             let placeOrder_button = document.querySelector('#placeOrder_button');

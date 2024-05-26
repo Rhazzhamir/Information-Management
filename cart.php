@@ -282,6 +282,51 @@ if (!isset($_SESSION['id'])) {
                         .total{
                           text-align: center;
                         }
+                        /* Delete-Btn */
+                    .Delete-btn {
+                        background-color: transparent;
+                        position: relative;
+                        border: none;
+                        }
+
+                        .Delete-btn::after {
+                        content: 'delete';
+                        position: absolute;
+                        top: -130%;
+                        left: 50%;
+                        transform: translateX(-50%);
+                        width: fit-content;
+                        height: fit-content;
+                        background-color: rgb(168, 7, 7);
+                        padding: 4px 8px;
+                        border-radius: 5px;
+                        transition: .2s linear;
+                        transition-delay: .2s;
+                        color: white;
+                        text-transform: uppercase;
+                        font-size: 12px;
+                        opacity: 0;
+                        visibility: hidden;
+                        }
+
+                        .icon {
+                        transform: scale(1.2);
+                        transition: .2s linear;
+                        }
+
+                        .Delete-btn:hover > .icon {
+                        transform: scale(1.5);
+                        }
+
+                        .Delete-btn:hover > .icon path {
+                        fill: rgb(168, 7, 7);
+                        }
+
+                        .Delete-btn:hover::after {
+                        visibility: visible;
+                        opacity: 1;
+                        top: -160%;
+                        }
         </style>
     </head>
     <body data-customer-id="<?php echo $_SESSION['id']?>" data-cart-id="<?php echo $_SESSION["cart_id"]?>">
@@ -305,6 +350,7 @@ if (!isset($_SESSION['id'])) {
           <th scope="col">Product Price</th>
           <th scope="col">Quantity</th>
           <th>Select</th>
+          <th>Delete</th>
         </tr>
       </thead>
       <tbody id="products_list">
@@ -357,6 +403,13 @@ if (!isset($_SESSION['id'])) {
                     </defs> 
                   </svg>
                 </div>            
+              </td>
+              <td>
+                <button type="button" class="Delete-btn btn-danger delete-button" data-bs-toggle="modal" data-bs-target="#deleteModal">
+                  <svg viewBox="0 0 15 17.5" height="17.5" width="15" xmlns="http://www.w3.org/2000/svg" class="icon">
+                  <path transform="translate(-2.5 -1.25)" d="M15,18.75H5A1.251,1.251,0,0,1,3.75,17.5V5H2.5V3.75h15V5H16.25V17.5A1.251,1.251,0,0,1,15,18.75ZM5,5V17.5H15V5Zm7.5,10H11.25V7.5H12.5V15ZM8.75,15H7.5V7.5H8.75V15ZM12.5,2.5h-5V1.25h5V2.5Z" id="Fill"></path>
+                  </svg>
+                </button>
               </td>
             </tr>
           <?php endforeach ?>
