@@ -12,7 +12,7 @@ $product_stock = filter_input(INPUT_POST, "product_stock", FILTER_VALIDATE_INT);
 
 
 if (empty($category_id) || empty($product_name) || empty($product_price) || empty($product_stock)) {
-  echo "Invalid Input";
+  echo "<script>alert('Invalid input');</script>";
   exit;
 }
 

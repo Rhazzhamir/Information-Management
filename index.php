@@ -97,6 +97,7 @@ if (!isset($_SESSION['id'])) {
                             <li><a href="./logout.php" class="dropdown-item">Logout</a></li>
                         </ul>
                     </li>
+                    <!-- Product Management -->
                     <li class="nav-item dropdown align-item-center">
                         <div id="Management" class="nav-link dropdown-toggle " href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             Product Management
@@ -106,7 +107,19 @@ if (!isset($_SESSION['id'])) {
                             <li><a class="dropdown-item" href="Manage_Category.php">Manage Category</a></li>
                         </ul>
                     </li>
+
+                    <!-- Category -->
+                    <li class="nav-item dropdown align-item-center">
+                        <div id="Management" class="nav-link dropdown-toggle " href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Category
+                        </div>
+                        <ul class="dropdown-menu text-center">
+                            <li><a class="dropdown-item" href="" ></a></li>
+                            <li><a class="dropdown-item" href=""></a></li>
+                        </ul>
+                    </li>
                 </ul>
+                
                 <!-- Icon-Cart -->
                 <a data-quantity="0" class="btn-cart" href="./cart.php">
                     <svg class="icon-cart" viewBox="0 0 24.38 30.52" height="30.52" width="24.38" xmlns="http://www.w3.org/2000/svg">

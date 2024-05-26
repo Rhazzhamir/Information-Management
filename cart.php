@@ -240,21 +240,58 @@ if (!isset($_SESSION['id'])) {
                 box-shadow: 0 -36px 0 -10px transparent, 32px -16px 0 -10px transparent, 32px 16px 0 -10px transparent, 0 36px 0 -10px transparent, -32px 16px 0 -10px transparent, -32px -16px 0 -10px transparent;
               }
             }
+            /* Back-Button */
+                      .Back-Button {
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        outline: none;
+                        cursor: pointer;
+                        width: 90px;
+                        height: 35px;
+                        background-image: linear-gradient(to top, #D8D9DB 0%, #fff 80%, #FDFDFD 100%);
+                        border-radius: 10px;
+                        border: 1px solid black;
+                        transition: all 0.2s ease;
+                        font-family: "Source Sans Pro", sans-serif;
+                        font-size: 14px;
+                        font-weight: 600;
+                        color: black;
+                        text-shadow: 0 1px #fff;
+                        }
+                        .back{
+                            text-decoration: none;
+                        }
+                        .Back-Button{
+                            margin: 5px 0 0 45px;
+                        }
+                        .Back-Button:hover{
+                            box-shadow: 0 4px 3px 1px gray, 0 6px 8px #D6D7D9, 0 -4px 4px #CECFD1, 0 -6px 4px #FEFEFE, inset 0 0 3px 3px #CECFD1;
+                        }
+
+                        .Back-Button:active{
+                            /* CSS styles for active state */
+                            box-shadow: 0 4px 3px 1px #FCFCFC, 0 6px 8px #D6D7D9, 0 -4px 4px #CECFD1, 0 -6px 4px #FEFEFE, inset 0 0 5px 3px #999, inset 0 0 30px #aaa;
+                        }
+
+                        .Back-Button:focus {
+                            /* CSS styles for focus state */
+                            box-shadow: 0 4px 3px 1px #FCFCFC, 0 6px 8px #D6D7D9, 0 -4px 4px #CECFD1, 0 -6px 4px #FEFEFE, inset 0 0 5px 3px #999, inset 0 0 30px #aaa;
+                        }
+                        .total{
+                          text-align: center;
+                        }
         </style>
     </head>
     <body data-customer-id="<?php echo $_SESSION['id']?>" data-cart-id="<?php $_SESSION['cart_id']?>">
     <div>
         <div class="mb-2 p-4 text-white d-flex align-items-center bg-secondary">
-          <h5 class="m-auto"><?php echo $_SESSION['name'] . "&nbsp;&nbsp;"?>'s Cart</h5>
+          <h5 class="m-auto">Shopping Cart</h5>
         </div>
       </div>
       <div class="m-4">
-        <a href="./index.php">
-          <button>
-              <span class="box">
-              Back
-              </span>
-          </button>
+        <a class="back" href="./index.php">
+          <button class="Back-Button">Back</button>     
         </a>
       </div>
     
@@ -266,7 +303,7 @@ if (!isset($_SESSION['id'])) {
           <th scope="col">Product Name</th>
           <th scope="col">Product Price</th>
           <th scope="col">Quantity</th>
-          <th>Selext</th>
+          <th>Select</th>
         </tr>
       </thead>
       <tbody id="products_list">
@@ -373,7 +410,6 @@ if (!isset($_SESSION['id'])) {
           });
           document.getElementById('totalAmount').textContent = total;
       }
-
       document.addEventListener('click', event => {
         const cbx = event.target.closest('.cbx-product');
         if (cbx) {
