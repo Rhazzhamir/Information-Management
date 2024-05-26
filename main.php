@@ -68,7 +68,7 @@ transition-duration: .5s;
 <div class="container text-center ">
 
     <div class="d-flex flex-wrap mt-5">
-        <?php include('products/get-products.php');
+        <?php 
         foreach ($data as $row):?>
             <div class="card product" style="height: 300px;" data-product-id="<?php echo $row['Product_Id'] ?>">
                 <img class="product-image" src="<?php echo 'data:image/jpeg;base64,' . base64_encode($row['Product_Img']) ?>" class="card-img-top">

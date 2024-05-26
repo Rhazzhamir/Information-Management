@@ -114,8 +114,14 @@ if (!isset($_SESSION['id'])) {
                             Category
                         </div>
                         <ul class="dropdown-menu text-center">
-                            <li><a class="dropdown-item" href="" ></a></li>
-                            <li><a class="dropdown-item" href=""></a></li>
+
+                                <li><a class="dropdown-item" href="index.php"> All</a></li>
+                            <?php
+                            include('./category/get-categories.php');
+                            foreach($data as $d) {?>
+                                <li><a class="dropdown-item" href="<?php echo "index.php?category_id=" . $d['category_id'] ?>"> <?php echo $d['category_name'] ?></a></li>
+                            <?php }?>
+                            
                         </ul>
                     </li>
                 </ul>
@@ -136,7 +142,17 @@ if (!isset($_SESSION['id'])) {
         </div>
     </nav>
     
-    <?php include('main.php')?>
+    <?php
+    $data = null;
+    if (isset($_GET['category_id'])) {
+        $category_id = filter_input(INPUT_GET, 'category_id', FILTER_VALIDATE_INT);
+        include('./products/get-products-by-category.php');
+        $data = getProductsByCategory($category_id);
+    } else {
+        include('products/get-products.php');
+    }
+    include('main.php')
+    ?>
 
 
 
