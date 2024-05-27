@@ -359,6 +359,7 @@
                         echo "<td>{$data['Quantity']}</td>";
                         echo "<td>{$data['Product_Price']}</td>";
                         echo "</tr>";
+                        // echo "<h1>{$_POST['quant']} => {$data['Product_Price']}</h1>";
                         $totalAmount += $data['Quantity'] * $data['Product_Price'];
                     }
                     ?>

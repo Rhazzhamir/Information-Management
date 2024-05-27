@@ -1,7 +1,11 @@
 <?php
 
-$id = filter_input(INPUT_GET, "id", FILTER_VALIDATE_INT);
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+    echo "Invalid Request";
+    exit;
+}
 
+$id = filter_input(INPUT_POST, "id", FILTER_VALIDATE_INT);
 try {
     include_once('../include/Connection.php');
     $sql = "DELETE FROM Cart_Product WHERE Product_Id = ?";

@@ -382,7 +382,7 @@ if (!isset($_SESSION['id'])) {
                 <td><img class="product-img" src="<?php echo 'data:image/jpeg;base64,' . base64_encode($row['Product_Img'])?>"></td>
                 <td><?php echo $row['Product_Name']?></td>
                 <td class="price"><?php echo $row['Product_Price']?></td>
-                <td><input class="qty" type="number" value="<?php echo $row['Quantity']?>" oninput="calculateTotalAmt()"></td>
+                <td><input id="qt" class="qty" type="number" value="<?php echo $row['Quantity']?>" oninput="calculateTotalAmt()"></td>
                 <!-- CHECKBOX -->
                 <td>
                   <div class="checkbox-wrapper-12">
@@ -404,16 +404,16 @@ if (!isset($_SESSION['id'])) {
                     </svg>
                   </div>            
                 </td>
+                <!-- Delete -->
                 <td>
-                  <!-- Delete -->
-                  <button type="button" class="Delete-btn btn-danger delete-button" data-bs-toggle="modal" data-bs-target="#deleteModal">
-                    <svg viewBox="0 0 15 17.5" height="17.5" width="15" xmlns="http://www.w3.org/2000/svg" class="icon">
-                    <path transform="translate(-2.5 -1.25)" d="M15,18.75H5A1.251,1.251,0,0,1,3.75,17.5V5H2.5V3.75h15V5H16.25V17.5A1.251,1.251,0,0,1,15,18.75ZM5,5V17.5H15V5Zm7.5,10H11.25V7.5H12.5V15ZM8.75,15H7.5V7.5H8.75V15ZM12.5,2.5h-5V1.25h5V2.5Z" id="Fill"></path>
-                    </svg>
-                  </button>
+                  <a class="Delete-btn btn-danger delete-button" href="./cart/delete-cart.php?id=<?php echo $row['Product_Id'] ?>">
+                      <svg viewBox="0 0 15 17.5" height="17.5" width="15" xmlns="http://www.w3.org/2000/svg" class="icon">
+                      <path transform="translate(-2.5 -1.25)" d="M15,18.75H5A1.251,1.251,0,0,1,3.75,17.5V5H2.5V3.75h15V5H16.25V17.5A1.251,1.251,0,0,1,15,18.75ZM5,5V17.5H15V5Zm7.5,10H11.25V7.5H12.5V15ZM8.75,15H7.5V7.5H8.75V15ZM12.5,2.5h-5V1.25h5V2.5Z" id="Fill"></path>
+                      </svg>
+                  </a>
                 </td>
               </tr>
-            <?php endforeach ?>
+            <?php endforeach; ?>
         </tbody>
       </table>
         <div class="total"><b>Total Amount:</b> <span id="totalAmount">0.00</span></div>
@@ -442,6 +442,7 @@ if (!isset($_SESSION['id'])) {
           const products = Array.from(document.getElementById('products_list').children);
           const products_list = [];
           const formData = {};
+          var qt = document.getElementById('qt');
           formData.customer_id = document.body.getAttribute('data-customer-id');
           formData.cart_id = document.body.getAttribute('data-cart-id');
           products.forEach(element => {
@@ -450,7 +451,10 @@ if (!isset($_SESSION['id'])) {
             }
           });
           formData.products_id_list = JSON.stringify(products_list);
-          redirectPost('checkout.php', formData);
+          var params = {
+            quant: qt 
+          };
+          redirectPost('checkout.php', formData, params);
         });
 
 
@@ -461,7 +465,9 @@ if (!isset($_SESSION['id'])) {
               const row = elem.closest('.product[scope="row"]');
               const quantiy = row.querySelector('.qty').value;
               const price = row.querySelector('.price').textContent;
+              // console.log(quantiy);
               total += quantiy * price;
+              // console.log(total);
             });
             document.getElementById('totalAmount').textContent = total;
         }
