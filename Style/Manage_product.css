@@ -1,0 +1,266 @@
+/*  */
+            .box {
+            width: 100px;
+            height: 35px;
+            float: left;
+            transition: .5s linear;
+            position: relative;
+            display: block;
+            overflow: hidden;
+            padding: 5px;
+            margin: 5px 0 0 45px;
+            text-align: center;
+            background: transparent;
+            text-transform: uppercase;
+            font-weight: 900;
+            }
+
+            .box:before {
+            position: absolute;
+            content: '';
+            left: 0;
+            bottom: 0;
+            height: 4px;
+            width: 100%;
+            border-bottom: 4px solid transparent;
+            border-left: 4px solid transparent;
+            box-sizing: border-box;
+            transform: translateX(100%);
+            }
+
+            .box:after {
+            position: absolute;
+            content: '';
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            border-top: 4px solid transparent;
+            border-right: 4px solid transparent;
+            box-sizing: border-box;
+            transform: translateX(-100%);
+            }
+
+            .box:hover {
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+            }
+
+            .box:hover:before {
+            border-color: #262626;
+            height: 100%;
+            transform: translateX(0);
+            transition: .3s transform linear, .3s height linear .3s;
+            }
+
+            .box:hover:after {
+            border-color: #262626;
+            height: 100%;
+            transform: translateX(0);
+            transition: .3s transform linear, .3s height linear .5s;
+            }
+
+            button {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+            outline: none;
+            border: none;
+            background: transparent;
+            }
+            form.mb-3 > input{
+                width: 500px;
+            }
+            .category-container {
+                display: flex;
+                align-items: center;
+            }
+            #category {
+                max-width: 200px;
+                margin-left: 10px;
+                margin-right: 20px;
+                height: 38px;
+            }
+            .product-img img {
+                width: 80px;
+                height: 80px;
+                object-fit: cover;
+                object-position: center;
+            }
+                            /* Update_btn */
+                .Update_btn {
+                    position: relative;
+                    display: flex;
+                    align-items: center;
+                    justify-content: flex-start;
+                    width: 110px;
+                    height: 40px;
+                    border: none;
+                    padding: 0px 20px;
+                    background-color: green;
+                    color: white;
+                    font-weight: 500;
+                    cursor: pointer;
+                    border-radius: 10px;
+                    box-shadow: 5px 5px 0px gray;
+                    transition-duration: .3s;
+                    }
+
+                    .svg {
+                    width: 13px;
+                    position: absolute;
+                    right: 0;
+                    margin-right: 20px;
+                    fill: white;
+                    transition-duration: .3s;
+                    }
+
+                    .Update_btn:hover {
+                    color: transparent;
+                    }
+
+                    .Update_btn:hover svg {
+                    right: 43%;
+                    margin: 0;
+                    padding: 0;
+                    border: none;
+                    transition-duration: .3s;
+                    }
+
+                    .Update_btn:active {
+                    transform: translate(3px , 3px);
+                    transition-duration: .3s;
+                    box-shadow: 2px 2px 0px rgb(140, 32, 212);
+                    }
+
+                    /* Delete-Btn */
+                    .Delete-btn {
+                        background-color: transparent;
+                        position: relative;
+                        border: none;
+                        }
+
+                        .Delete-btn::after {
+                        content: 'delete';
+                        position: absolute;
+                        top: -130%;
+                        left: 50%;
+                        transform: translateX(-50%);
+                        width: fit-content;
+                        height: fit-content;
+                        background-color: rgb(168, 7, 7);
+                        padding: 4px 8px;
+                        border-radius: 5px;
+                        transition: .2s linear;
+                        transition-delay: .2s;
+                        color: white;
+                        text-transform: uppercase;
+                        font-size: 12px;
+                        opacity: 0;
+                        visibility: hidden;
+                        }
+
+                        .icon {
+                        transform: scale(1.2);
+                        transition: .2s linear;
+                        }
+
+                        .Delete-btn:hover > .icon {
+                        transform: scale(1.5);
+                        }
+
+                        .Delete-btn:hover > .icon path {
+                        fill: rgb(168, 7, 7);
+                        }
+
+                        .Delete-btn:hover::after {
+                        visibility: visible;
+                        opacity: 1;
+                        top: -160%;
+                        }
+
+                    /* SaveButton and backButton Save-Modal */
+                    .Save-btn ,.Back-Button ,.Save-Modal{
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        outline: none;
+                        cursor: pointer;
+                        width: 90px;
+                        height: 35px;
+                        background-image: linear-gradient(to top, #D8D9DB 0%, #fff 80%, #FDFDFD 100%);
+                        border-radius: 10px;
+                        border: 1px solid black;
+                        transition: all 0.2s ease;
+                        font-family: "Source Sans Pro", sans-serif;
+                        font-size: 14px;
+                        font-weight: 600;
+                        color: black;
+                        text-shadow: 0 1px #fff;
+                        }
+                        .back{
+                            text-decoration: none;
+                        }
+                        .Back-Button{
+                            margin: 5px 0 0 45px;
+                        }
+                        .Save-btn:hover, .Back-Button:hover ,.Save-Modal:hover {
+                            /* CSS styles for hover state */
+                            box-shadow: 0 4px 3px 1px gray, 0 6px 8px #D6D7D9, 0 -4px 4px #CECFD1, 0 -6px 4px #FEFEFE, inset 0 0 3px 3px #CECFD1;
+                        }
+
+                        .Save-btn:active, .Back-Button:active ,.Save-Modal:active {
+                            /* CSS styles for active state */
+                            box-shadow: 0 4px 3px 1px #FCFCFC, 0 6px 8px #D6D7D9, 0 -4px 4px #CECFD1, 0 -6px 4px #FEFEFE, inset 0 0 5px 3px #999, inset 0 0 30px #aaa;
+                        }
+
+                        .Save-btn:focus, .Back-Button:focus ,.Save-Modal:focus{
+                            /* CSS styles for focus state */
+                            box-shadow: 0 4px 3px 1px #FCFCFC, 0 6px 8px #D6D7D9, 0 -4px 4px #CECFD1, 0 -6px 4px #FEFEFE, inset 0 0 5px 3px #999, inset 0 0 30px #aaa;
+                        }
+
+                    /* Add-Category-Btn */
+                    .Add-Category-Btn {
+                        align-items: center;
+                        appearance: none;
+                        background-color: #FCFCFD;
+                        border-radius: 4px;
+                        border-width: 0;
+                        box-shadow: rgba(45, 35, 66, 0.2) 0 2px 4px,rgba(45, 35, 66, 0.15) 0 7px 13px -3px,#D6D6E7 0 -3px 0 inset;
+                        box-sizing: border-box;
+                        color: #36395A;
+                        cursor: pointer;
+                        display: inline-flex;
+                        font-family: "JetBrains Mono",monospace;
+                        height: 48px;
+                        justify-content: center;
+                        line-height: 1;
+                        list-style: none;
+                        overflow: hidden;
+                        padding-left: 16px;
+                        padding-right: 16px;
+                        position: relative;
+                        text-align: left;
+                        text-decoration: none;
+                        transition: box-shadow .15s,transform .15s;
+                        user-select: none;
+                        -webkit-user-select: none;
+                        touch-action: manipulation;
+                        white-space: nowrap;
+                        will-change: box-shadow,transform;
+                        font-size: 18px;
+                        font-weight: 800;
+                        }
+
+                        .Add-Category-Btn:focus {
+                        box-shadow: #D6D6E7 0 0 0 1.5px inset, rgba(45, 35, 66, 0.4) 0 2px 4px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #D6D6E7 0 -3px 0 inset;
+                        }
+
+                        .Add-Category-Btn:hover {
+                        box-shadow: rgba(45, 35, 66, 0.3) 0 4px 8px, rgba(45, 35, 66, 0.2) 0 7px 13px -3px, #D6D6E7 0 -3px 0 inset;
+                        transform: translateY(-2px);
+                        }
+
+                        .Add-Category-Btn:active {
+                        box-shadow: #D6D6E7 0 3px 7px inset;
+                        transform: translateY(2px);
+                        }

@@ -14,70 +14,8 @@ if (!isset($_SESSION['id'])) {
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <title>Document</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style/index.css">
     <script src="./script.js"></script>
-    <style>
-        /* btn-cart */
-    .btn-cart {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 50px;
-        height: 50px;
-        border-radius: 10px;
-        border: none;
-        background-color: transparent;
-        position: relative;
-        }
-        
-        .btn-cart::after {
-        content: attr(data-quantity);
-        width: fit-content;
-        height: fit-content;
-        position: absolute;
-        font-size: 15px;
-        color: white;
-        font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-        opacity: 0;
-        visibility: hidden;
-        transition: .2s linear;
-        top: 115%;
-        }
-        
-        .icon-cart {
-        width: 24.38px;
-        height: 30.52px;
-        transition: .2s linear;
-        }
-        
-        .icon-cart path {
-        fill: rgb(240, 8, 8);
-        transition: .2s linear;
-        }
-        
-        .btn-cart:hover > .icon-cart {
-        transform: scale(1.2);
-        }
-        
-        .btn-cart:hover > .icon-cart path {
-        fill: rgb(186, 34, 233);
-        }
-        
-        .btn-cart:hover::after {
-        visibility: visible;
-        opacity: 1;
-        top: 105%;
-        }
-        
-        .quantity {
-        display: none;
-        }
-    
-        .btn-cart{
-            margin-left: 435px;
-        }
-    </style>
-
 </head>   
     <body data-cart-id="<?php echo $_SESSION['cart_id']?>">
     <nav class="navbar navbar-expand bg-body-secondary p-1">
